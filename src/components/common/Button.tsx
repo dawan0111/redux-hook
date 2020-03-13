@@ -23,6 +23,10 @@ const ButtonStyle = styled.button<{
     background: #e91e63;
     color: #fff;
   `}
+
+  &:focus {
+    outline: none;
+  }
 `
 
 export default React.memo(function Button(props: IButtonProps) {

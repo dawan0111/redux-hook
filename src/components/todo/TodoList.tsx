@@ -1,12 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TodoItem from './TodoItem';
-import { Todo } from '../../types';
 import todoContext from '../../contexts/todoContext';
-
-interface IProps {
-  todos: Todo[]
-}
 
 const List = styled.div`
   display: flex;
@@ -21,13 +16,21 @@ const Empty = styled.div`
   color: #666;
 `
 
-export default function TodoList(props: IProps) {
-  const { todos } = React.useContext(todoContext);
-
+export default function TodoList() {
+  const { todos, activeTodo, onActiveTodo, onComplateTodo, onDeleteTodo, onClickUpdate } = React.useContext(todoContext);
+  
   return (
     <List>
       {todos.map(todo => (
-        <TodoItem todo={todo} key={todo.id} />
+        <TodoItem
+          {...todo}
+          isActive={activeTodo?.id === todo.id}
+          onActive={onActiveTodo}
+          onComplate={onComplateTodo}
+          onDelete={onDeleteTodo}
+          onUpdate={onClickUpdate}
+          key={todo.id}
+        />
       ))}
       {
         !todos.length && (

@@ -7,6 +7,7 @@ import { Wrapper } from '../../style';
 
 import TodoList from './TodoList';
 import TodoAdd from './TodoAdd';
+import TodoUpdate from './TodoUpdate';
 
 const Container = styled.div`
   display: flex;
@@ -38,7 +39,7 @@ const HeaderTitle = styled.h2`
 
 const Body = styled(Wrapper)`
   flex: 1;
-  padding: 68px 16px 0;
+  padding: 68px 0 0;
 `
 
 const AddBtn = styled.button`
@@ -65,10 +66,11 @@ export default function Todo() {
         </HeaderContent>
       </Header>
       <Body>
-        <TodoList todos={[]} />
+        <TodoList/>
       </Body>
       <AddBtn onClick={_ => onOpenAddDialog()}><span role="img" aria-label="add">✏️</span></AddBtn>
       <TodoAdd />
+      <TodoUpdate />
     </Container>
   )
 }

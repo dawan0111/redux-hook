@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
-import { addTodo, activeTodo } from '../modules/stores/todo';
+import { addTodo, activeTodo, deleteTodo, complateTodo, updateTodo } from '../modules/stores/todo';
 
 import { TodoFormValue, Todo } from '../types';
 import { RootState } from '../modules';
@@ -17,14 +17,28 @@ export default function useTodo() {
     dispatch(addTodo(todo));
   }, [dispatch])
 
-  const onActive = React.useCallback((todo: Todo) => {
-    dispatch(activeTodo(todo))
+  const onComplate = React.useCallback((todoId: number, complate: boolean) => {
+    dispatch(complateTodo(todoId, complate));
+  }, [dispatch])
+
+  const onDelete = React.useCallback((todoId: number) => {
+    dispatch(deleteTodo(todoId));
+  }, [dispatch])
+
+  const onUpdate = React.useCallback((todoId: number, todo: TodoFormValue) => {
+    dispatch(updateTodo(todoId, todo));
+  }, [dispatch])
+  const onActive = React.useCallback((todo: Todo | null) => {
+    dispatch(activeTodo(todo));
   }, [dispatch])
 
   return {
     todos,
     activeTodo: activeTodoItem,
     onAdd,
-    onActive
+    onActive,
+    onComplate,
+    onDelete,
+    onUpdate
   }
 }
